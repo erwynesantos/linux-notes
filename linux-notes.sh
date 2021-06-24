@@ -1091,6 +1091,35 @@ if test -f "$FILE"; then
 fi
 #----------------------------------------------------------------------------------------------------------------------------------------------
 
-# Adding a line on the first line of the file
+# Modifying strings in a file using awk and sed
+
+## Adding a line on the first line of the file
 awk -i inplace 'BEGINFILE{print "first line"}{print}' foo.sh
 sed -i '1i #!/bin/bash' foo.sh
+
+## If you want to edit the file in-place
+sed -i -e 's/^/prefix/' file
+
+## If you want to create a new file
+sed -e 's/^/prefix/' file > file.new
+
+## Variables in sed using double quotes
+sed -i "s/$var/r_str/g" file_name
+
+## If you have a slash / in the variable then use different separator
+sed -i "s|$var|r_str|g" file_name
+
+## Concise version of the sed command:
+sed -i s/$/end-of-line-text/ file.txt
+## sed stream editor
+## -i in-place (edit file in place)
+## s substitution command
+## /replacement_from_reg_exp/replacement_to_text/ statement
+## $ matches the end of line (replacement_from_reg_exp)
+## end-of-line-text text you want to add at the end of every line (replacement_to_text)
+## file.txt the file name
+#----------------------------------------------------------------------------------------------------------------------------------------------
+
+# How to set your $PATH variable in Linux
+## Simply add /place/with/the/file to the $PATH variable with the following command:
+export PATH=$PATH:/place/with/the/file
